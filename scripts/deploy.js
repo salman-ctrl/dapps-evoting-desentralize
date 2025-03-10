@@ -13,11 +13,18 @@ async function main() {
   // manually to make sure everything is compiled
   // await hre.run('compile');
 
+  // We get the contract to deploy
+  const youtubeFactory = await hre.ethers.getContractFactory("Youtube");
+  const yt = await youtubeFactory.deploy();
 
+  await yt.deployed();
 
-  // We recommend this pattern to be able to use async/await everywhere
-  // and properly handle errors.
-  main().catch((error) => {
-    console.error(error);
-    process.exitCode = 1;
-  });
+  console.log("Yt deployed to:", yt.address);
+}
+
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
